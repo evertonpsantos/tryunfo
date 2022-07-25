@@ -93,6 +93,7 @@ class Form extends React.Component {
         </label>
 
         <label htmlFor="trunfo-input">
+          Super Trunfo?
           <input
             type="checkbox"
             data-testid="trunfo-input"
