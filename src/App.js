@@ -51,6 +51,8 @@ class App extends React.Component {
     });
   }
 
+  // Como criar ids unicas: https://stackoverflow.com/questions/3231459/how-can-i-create-unique-ids-with-javascript
+
   onSaveButtonClick = (event) => {
     event.preventDefault();
 
@@ -58,6 +60,7 @@ class App extends React.Component {
       cardImage, cardRare, cardTrunfo } = this.state;
 
     const savedCard = {
+      id: (new Date()).getTime(),
       cardName,
       cardImage,
       cardDescription,
@@ -82,6 +85,20 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
     }));
   }
+
+  deleteCard = (id) => {
+    const { savedCards } = this.state;
+    const deletedList = savedCards
+      .filter((card) => card.id !== id);
+    this.setState({ savedCards: [...deletedList] }, () => {
+      const trunfoCheck = savedCards.some((card) => card.cardTrunfo === true);
+      if (trunfoCheck) {
+        this.setState({
+          hasTrunfo: false,
+        });
+      }
+    });
+  };
 
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
@@ -113,6 +130,8 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          cardType="preview"
+          deleteCard={ this.deleteCard }
         />
         { savedCards.map((card, index) => (<Card
           cardName={ card.cardName }
@@ -123,6 +142,8 @@ class App extends React.Component {
           cardImage={ card.cardImage }
           cardRare={ card.cardRare }
           cardTrunfo={ card.cardTrunfo }
+          cardType="card"
+          deleteCard={ () => this.deleteCard(card.id) }
           key={ index }
         />)) }
       </div>
