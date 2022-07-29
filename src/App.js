@@ -100,6 +100,14 @@ class App extends React.Component {
     });
   };
 
+  filterByName = ({ target }) => {
+    const { value } = target;
+    const { savedCards } = this.state;
+    const filteredByNameArray = savedCards
+      .filter((card) => card.cardName.includes(value));
+    this.setState({ savedCards: filteredByNameArray });
+  }
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, hasTrunfo,
@@ -133,6 +141,8 @@ class App extends React.Component {
           cardType="preview"
           deleteCard={ this.deleteCard }
         />
+        <p>Cartas: </p>
+        <input type="text" data-testid="name-filter" onChange={ this.filterByName } />
         { savedCards.map((card, index) => (<Card
           cardName={ card.cardName }
           cardDescription={ card.cardDescription }
