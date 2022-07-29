@@ -14,6 +14,7 @@ const initialState = {
   hasTrunfo: false,
   isSaveButtonDisabled: true,
   savedCards: [],
+  rareFilter: 'todas',
 };
 
 class App extends React.Component {
@@ -108,10 +109,19 @@ class App extends React.Component {
     this.setState({ savedCards: filteredByNameArray });
   }
 
+  filterByRarity = ({ target }) => {
+    const { value } = target;
+    const { savedCards } = this.state;
+    if (value === 'todas') return this.setState({ savedCards });
+    const filteredByRarity = savedCards
+      .filter((card) => card.cardRare === value);
+    this.setState({ savedCards: filteredByRarity });
+  }
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, hasTrunfo,
-      isSaveButtonDisabled, savedCards } = this.state;
+      isSaveButtonDisabled, savedCards, rareFilter } = this.state;
 
     return (
       <div>
@@ -141,8 +151,32 @@ class App extends React.Component {
           cardType="preview"
           deleteCard={ this.deleteCard }
         />
-        <p>Cartas: </p>
-        <input type="text" data-testid="name-filter" onChange={ this.filterByName } />
+        <label htmlFor="name-filter">
+          Cartas:
+          <input
+            type="text"
+            data-testid="name-filter"
+            onChange={ this.filterByName }
+            id="name-filter"
+          />
+        </label>
+
+        <label htmlFor="rare-filter">
+          Raridade da carta:
+          <select
+            data-testid="rare-filter"
+            id="rare-filter"
+            name="rareFilter"
+            value={ rareFilter }
+            onChange={ this.filterByRarity }
+          >
+            <option value="todas">Todas</option>
+            <option value="normal">Normal</option>
+            <option value="raro">Raro</option>
+            <option value="muito raro">Muito raro</option>
+          </select>
+        </label>
+
         { savedCards.map((card, index) => (<Card
           cardName={ card.cardName }
           cardDescription={ card.cardDescription }
