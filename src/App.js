@@ -15,6 +15,7 @@ const initialState = {
   isSaveButtonDisabled: true,
   savedCards: [],
   rareFilter: 'todas',
+  trunfoFilter: false,
 };
 
 class App extends React.Component {
@@ -118,10 +119,23 @@ class App extends React.Component {
     this.setState({ savedCards: filteredByRarity });
   }
 
+  filterByTrunfo = () => {
+    this.setState((prevState) => ({
+      trunfoFilter: !prevState.trunfoFilter,
+    }), () => {
+      const { trunfoFilter, savedCards } = this.state;
+      if (trunfoFilter) {
+        const filteredByTrunfo = savedCards
+          .filter((card) => card.cardTrunfo === true);
+        this.setState({ savedCards: filteredByTrunfo });
+      }
+    });
+  }
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, hasTrunfo,
-      isSaveButtonDisabled, savedCards, rareFilter } = this.state;
+      isSaveButtonDisabled, savedCards, rareFilter, trunfoFilter } = this.state;
 
     return (
       <div>
@@ -158,6 +172,7 @@ class App extends React.Component {
             data-testid="name-filter"
             onChange={ this.filterByName }
             id="name-filter"
+            disabled={ trunfoFilter }
           />
         </label>
 
@@ -168,6 +183,7 @@ class App extends React.Component {
             id="rare-filter"
             name="rareFilter"
             value={ rareFilter }
+            disabled={ trunfoFilter }
             onChange={ this.filterByRarity }
           >
             <option value="todas">Todas</option>
@@ -175,6 +191,17 @@ class App extends React.Component {
             <option value="raro">Raro</option>
             <option value="muito raro">Muito raro</option>
           </select>
+        </label>
+
+        <label htmlFor="trunfo-filter">
+          Super Trunfo
+          <input
+            type="checkbox"
+            data-testid="trunfo-filter"
+            id="trunfo-filter"
+            name="trunfoFilter"
+            onChange={ this.filterByTrunfo }
+          />
         </label>
 
         { savedCards.map((card, index) => (<Card
