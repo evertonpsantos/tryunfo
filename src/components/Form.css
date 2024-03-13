@@ -1,0 +1,13 @@
+.form-main {
+  background-color: beige;
+  border: 10px;
+  display: flex;
+  flex-flow: column;
+  margin: 20px auto;
+  padding: 10px;
+  width: 500px;
+}
+
+.form-input {
+  margin: 5px 10px;
+}
