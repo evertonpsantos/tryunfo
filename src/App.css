@@ -1,0 +1,13 @@
+.filter-form-container {
+  background-color: beige;
+  border: 10px;
+  display: flex;
+  flex-flow: column;
+  margin: 20px auto;
+  padding: 15px;
+  width: 500px;
+}
+
+.filter-input {
+  margin: 5px 10px;
+}
