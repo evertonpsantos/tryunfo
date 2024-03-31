@@ -11,3 +11,9 @@
 .filter-input {
   margin: 5px 10px;
 }
+
+.saved-cards-container {
+  display: flex;
+  flex-flow: row;
+
+}

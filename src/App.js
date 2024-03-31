@@ -212,19 +212,22 @@ class App extends React.Component {
           </label>
         </div>
 
-        { savedCards.map((card, index) => (<Card
-          cardName={ card.cardName }
-          cardDescription={ card.cardDescription }
-          cardAttr1={ card.cardAttr1 }
-          cardAttr2={ card.cardAttr2 }
-          cardAttr3={ card.cardAttr3 }
-          cardImage={ card.cardImage }
-          cardRare={ card.cardRare }
-          cardTrunfo={ card.cardTrunfo }
-          cardType="card"
-          deleteCard={ () => this.deleteCard(card.id) }
-          key={ index }
-        />)) }
+        <div className="saved-cards-container">
+          { savedCards.map((card, index) => (<Card
+            cardName={ card.cardName }
+            cardDescription={ card.cardDescription }
+            cardAttr1={ card.cardAttr1 }
+            cardAttr2={ card.cardAttr2 }
+            cardAttr3={ card.cardAttr3 }
+            cardImage={ card.cardImage }
+            cardRare={ card.cardRare }
+            cardTrunfo={ card.cardTrunfo }
+            cardType="card"
+            deleteCard={ () => this.deleteCard(card.id) }
+            key={ index }
+          />)) }
+        </div>
+
       </>
     );
   }
