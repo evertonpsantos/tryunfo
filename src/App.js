@@ -58,6 +58,7 @@ class App extends React.Component {
 
   onSaveButtonClick = (event) => {
     event.preventDefault();
+    const minimumLength = 10;
 
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo } = this.state;
@@ -65,7 +66,7 @@ class App extends React.Component {
     const savedCard = {
       id: (new Date()).getTime(),
       cardName,
-      cardImage,
+      cardImage: cardImage.length < minimumLength ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png' : cardImage,
       cardDescription,
       cardAttr1,
       cardAttr2,
