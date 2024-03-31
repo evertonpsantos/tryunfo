@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
+import './App.css';
 
 const initialState = {
   cardName: '',
@@ -138,7 +139,7 @@ class App extends React.Component {
       isSaveButtonDisabled, savedCards, rareFilter, trunfoFilter } = this.state;
 
     return (
-      <div>
+      <>
         <Form
           cardName={ cardName }
           cardDescription={ cardDescription }
@@ -165,44 +166,50 @@ class App extends React.Component {
           cardType="preview"
           deleteCard={ this.deleteCard }
         />
-        <label htmlFor="name-filter">
-          Cartas:
-          <input
-            type="text"
-            data-testid="name-filter"
-            onChange={ this.filterByName }
-            id="name-filter"
-            disabled={ trunfoFilter }
-          />
-        </label>
 
-        <label htmlFor="rare-filter">
-          Raridade da carta:
-          <select
-            data-testid="rare-filter"
-            id="rare-filter"
-            name="rareFilter"
-            value={ rareFilter }
-            disabled={ trunfoFilter }
-            onChange={ this.filterByRarity }
-          >
-            <option value="todas">Todas</option>
-            <option value="normal">Normal</option>
-            <option value="raro">Raro</option>
-            <option value="muito raro">Muito raro</option>
-          </select>
-        </label>
+        <div className="filter-form-container">
+          <label htmlFor="name-filter">
+            Cartas:
+            <input
+              type="text"
+              data-testid="name-filter"
+              onChange={ this.filterByName }
+              id="name-filter"
+              disabled={ trunfoFilter }
+              className="filter-input"
+            />
+          </label>
 
-        <label htmlFor="trunfo-filter">
-          Super Trunfo
-          <input
-            type="checkbox"
-            data-testid="trunfo-filter"
-            id="trunfo-filter"
-            name="trunfoFilter"
-            onChange={ this.filterByTrunfo }
-          />
-        </label>
+          <label htmlFor="rare-filter">
+            Raridade da carta:
+            <select
+              data-testid="rare-filter"
+              id="rare-filter"
+              name="rareFilter"
+              value={ rareFilter }
+              disabled={ trunfoFilter }
+              onChange={ this.filterByRarity }
+              className="filter-input"
+            >
+              <option value="todas">Todas</option>
+              <option value="normal">Normal</option>
+              <option value="raro">Raro</option>
+              <option value="muito raro">Muito raro</option>
+            </select>
+          </label>
+
+          <label htmlFor="trunfo-filter">
+            Super Trunfo
+            <input
+              type="checkbox"
+              data-testid="trunfo-filter"
+              id="trunfo-filter"
+              name="trunfoFilter"
+              onChange={ this.filterByTrunfo }
+              className="filter-input"
+            />
+          </label>
+        </div>
 
         { savedCards.map((card, index) => (<Card
           cardName={ card.cardName }
@@ -217,7 +224,7 @@ class App extends React.Component {
           deleteCard={ () => this.deleteCard(card.id) }
           key={ index }
         />)) }
-      </div>
+      </>
     );
   }
 }
