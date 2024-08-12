@@ -1,10 +1,11 @@
 .form-main {
-  background-color: beige;
+  background-color: rgb(179, 160, 125);
   border: 10px;
+  border-radius: 5px;
   display: flex;
   flex-flow: column;
   margin: 20px auto;
-  padding: 10px;
+  padding: 15px;
   width: 500px;
 }
 

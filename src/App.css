@@ -1,10 +1,16 @@
-.filter-form-container {
+body {
   background-color: beige;
+}
+
+.filter-form-container {
+  background-color: rgb(131, 121, 102);
   border: 10px;
+  border-radius: 5px;
   display: flex;
   flex-flow: column;
   margin: 20px auto;
-  padding: 15px;
+  padding: 0 0 10px;
+  text-align: center;
   width: 500px;
 }
 
