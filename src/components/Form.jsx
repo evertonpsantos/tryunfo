@@ -33,6 +33,8 @@ class Form extends React.Component {
               value={ cardDescription }
               onChange={ onInputChange }
               className="form-input"
+              cols="50"
+              rows="3"
             />
           </label>
 
