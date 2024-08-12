@@ -169,8 +169,9 @@ class App extends React.Component {
         />
 
         <div className="filter-form-container">
+          <p>FILTRO</p>
           <label htmlFor="name-filter">
-            Cartas:
+            Carta:
             <input
               type="text"
               data-testid="name-filter"
